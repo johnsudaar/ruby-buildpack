@@ -64,7 +64,6 @@ module LanguagePack
     # @option options [Hash] :env explicit environment to run command in
     # @option options [Boolean] :user_env whether or not a user's environment variables will be loaded
     def run(command, options = {})
-      STDERR.puts "Running #{command_options_to_string(command, options)}"
       %x{ #{command_options_to_string(command, options)} }
     end
 
@@ -72,6 +71,7 @@ module LanguagePack
     # @param [String] command to be run
     # @return [String] output of stdout
     def run_stdout(command, options = {})
+      STDERR.puts "Running #{command_options_to_string(command, options)}"
       options[:out] ||= '2>/dev/null'
       run(command, options)
     end
